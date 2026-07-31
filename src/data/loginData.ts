@@ -19,6 +19,21 @@ export const loginData = {
         password: "wrong_password"
     },
 
+    emptyUsername: {
+        username: "",
+        password: "secret_sauce"
+    },
+
+    emptyPassword: {
+        username: "standard_user",
+        password: ""
+    },
+
+    emptyCredentials: {
+        username: "",
+        password: ""
+    },
+
     lockedUser: {
         username: "locked_out_user",
         password: "secret_sauce"

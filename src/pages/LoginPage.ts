@@ -3,6 +3,7 @@ import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
 
+  readonly loginLogo: Locator;
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
@@ -11,6 +12,7 @@ export class LoginPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
+    this.loginLogo = page.locator(".login_logo");
     this.usernameInput = page.locator('#user-name');
     this.passwordInput = page.locator('#password');
     this.loginButton = page.locator('#login-button');
@@ -27,7 +29,7 @@ export class LoginPage extends BasePage {
     await this.click(this.loginButton);
   }
 
-  async getErrorMessage() {
-    return await this.getText(this.errorMessage);
-  }
+  // async getErrorMessage() { // not used right now
+  //   return await this.getText(this.errorMessage);
+  // }
 }
