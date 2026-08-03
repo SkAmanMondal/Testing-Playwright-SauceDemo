@@ -10,6 +10,6 @@
 | LGN-006 | Login with empty password               |  Medium  | ✅ | Pass |
 | LGN-007 | Login with empty username & password    |  Medium  | ✅ | Pass |
 | LGN-008 | Login with locked out user              |   High   | ✅ | Pass |
-| LGN-009 | Verify password field is masked         |   Low    | ❌ | Not Started |
-| LGN-010 | Verify page title                       |   Low    | ❌ | Not Started |
-| LGN-011 | Verify login logo is displayed          |   Low    | ❌ | Not Started |
+| LGN-009 | Verify password field is masked         |   Low    | ✅ | Pass |
+| LGN-010 | Verify page title                       |   Low    | ✅ | Pass |
+| LGN-011 | Verify login logo is displayed          |   Low    | ✅ | Pass |
