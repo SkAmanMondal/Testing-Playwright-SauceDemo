@@ -131,21 +131,72 @@ test.describe("Inventory Module", () => {
     await expect(actualPrices).toEqual(expectedPrices);
   });
 
-  test.only("INV-010 | Add single product to cart", async ({
+  test("INV-010 | Add single product to cart", async ({
     page,
     inventoryPage,
   }) => {
     await expect(page).toHaveURL(/inventory/);
 
-    await inventoryPage.sort("hilo");
+    await inventoryPage.addProductToCart("Sauce Labs Backpack");
 
-    const prices = await inventoryPage.inventoryItemsPrices.allTextContents();
+    await expect(inventoryPage.cartBadge).toHaveText("1");
+  });
 
-    const actualPrices = prices.map((price) => Number(price.replace("$", "")));
+  test("INV-011 | Add multiple products to cart", async ({
+    page,
+    inventoryPage,
+  }) => {
+    await expect(page).toHaveURL(/inventory/);
 
-    const expectedPrices = [...actualPrices].sort((a, b) => b - a);
+    const products = [
+      "Sauce Labs Backpack",
+      "Sauce Labs Bolt T-Shirt",
+      "Sauce Labs Bike Light"
+    ];
 
-    await expect(actualPrices).toEqual(expectedPrices);
+    for (const product of products){
+
+      await inventoryPage.addProductToCart(product);
+    }
+
+    await expect(inventoryPage.cartBadge).toHaveText("3");
+  });
+
+  test("INV-012 | Remove product from cart", async ({
+    page,
+    inventoryPage,
+  }) => {
+    await expect(page).toHaveURL(/inventory/);
+
+    await inventoryPage.addProductToCart("Sauce Labs Backpack");
+
+    await inventoryPage.removeProductFromCart("Sauce Labs Backpack");
+
+    await expect(inventoryPage.cartBadge).toBeHidden();
+  });
+
+  test("INV-013 | Verify cart badge count", async ({
+    page,
+    inventoryPage
+  }) => {
+    await expect(page).toHaveURL(/inventory/);
+
+    await inventoryPage.addProductToCart("Sauce Labs Backpack");
+
+    await inventoryPage.addProductToCart("Sauce Labs Bolt T-Shirt");
+
+    await expect(inventoryPage.cartBadge).toHaveText("2");
+  });
+
+  test("INV-014 | Navigate to cart page | High", async ({
+    page,
+    inventoryPage
+  }) => {
+    await expect(page).toHaveURL(/inventory/);
+
+    await inventoryPage.openCart();
+
+    await expect(page).toHaveURL(/cart/);
   });
 
 
