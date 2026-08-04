@@ -175,8 +175,8 @@ npx playwright show-report
 | Framework | ✅ Completed |
 | Login | ✅ Completed |
 | Inventory | ✅ Completed |
-| Cart | 🚧 In Progress |
-| Checkout | ⏳ Planned |
+| Cart | ✅ Completed |
+| Checkout | 🚧 In Progress |
 | Reporting | ⏳ Planned |
 | CI/CD | ⏳ Planned |
 
