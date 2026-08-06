@@ -3,7 +3,7 @@ import { env } from "../../src/config/env";
 import {PRODUCTS} from "../../src/constants/products";
 
 
-test.describe("Inventory Module", () => {
+test.describe("Cart Module", () => {
   test.beforeEach(async ({ loginPage, page }) => {
     await loginPage.open();
 
