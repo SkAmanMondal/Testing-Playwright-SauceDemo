@@ -2,16 +2,16 @@
 
 | ID | Scenario | Priority | Status |
 |----|----------|----------|--------|
-| CHK-001 | Verify checkout information page opens | High | Not Started |
-| CHK-002 | Checkout with valid information | High | Not Started |
-| CHK-003 | Empty First Name | High | Not Started |
-| CHK-004 | Empty Last Name | High | Not Started |
-| CHK-005 | Empty Postal Code | High | Not Started |
-| CHK-006 | Verify checkout overview page | High | Not Started |
-| CHK-007 | Verify selected products are displayed | High | Not Started |
-| CHK-008 | Verify payment information | Medium | Not Started |
-| CHK-009 | Verify shipping information | Medium | Not Started |
-| CHK-010 | Verify total price calculation | High | Not Started |
+| CHK-001 | Verify checkout information page opens | High | Pass |
+| CHK-002 | Checkout with valid information | High | Pass |
+| CHK-003 | Empty First Name | High | Pass |
+| CHK-004 | Empty Last Name | High | Pass |
+| CHK-005 | Empty Postal Code | High | Pass |
+| CHK-006 | Verify checkout overview page | High | Pass |
+| CHK-007 | Verify selected products are displayed | High | Pass |
+| CHK-008 | Verify payment information | Medium | Pass |
+| CHK-009 | Verify shipping information | Medium | Pass |
+| CHK-010 | Verify total price calculation | High | Pass |
 | CHK-011 | Finish checkout | High | Not Started |
 | CHK-012 | Verify order confirmation | High | Not Started |
 | CHK-013 | Back Home navigation | Medium | Not Started |

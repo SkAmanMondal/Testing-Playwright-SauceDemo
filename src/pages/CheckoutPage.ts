@@ -7,6 +7,14 @@ export class CheckoutPage extends BasePage {
     readonly postalCode: Locator;
     readonly errorMessage: Locator;
     readonly continueBtn: Locator;
+    readonly checkoutSummary: Locator;
+    readonly finishBtn: Locator;
+    readonly productNames: Locator;
+    readonly paymentInfo: Locator;
+    readonly shippingInfo: Locator;
+    readonly itemTotal: Locator;
+    readonly tax: Locator;
+    readonly total: Locator;
     
     constructor(page: Page){
         super(page);
@@ -15,6 +23,14 @@ export class CheckoutPage extends BasePage {
         this.postalCode = page.locator('[placeholder="Zip/Postal Code"]');
         this.errorMessage = page.locator('[data-test="error"]');
         this.continueBtn = page.locator('[data-test="continue"]');
+        this.checkoutSummary = page.locator('[data-test="checkout-summary-container"]');
+        this.finishBtn = page.locator('[data-test="finish"]');
+        this.productNames = page.locator('[data-test="inventory-item-name"]');
+        this.paymentInfo = page.locator('[data-test="payment-info-value"]');
+        this.shippingInfo = page.locator('[data-test="shipping-info-value"]');
+        this.itemTotal = page.locator('[data-test="subtotal-label"]');
+        this.tax = page.locator('[data-test="tax-label"]');
+        this.total = page.locator('[data-test="total-label"]');
     }
 
     async fillCheckoutInformation(firstName: string, lastName: string, postalCode: string){

@@ -81,23 +81,89 @@ test.describe("Checkout Module", () => {
   });
   
   test("CHK-006 | Verify checkout overview page", async({page, inventoryPage, cartPage, checkoutPage})=>{
+    await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
+
+    await inventoryPage.openCart();
+    await cartPage.checkout();
+
+    await expect(page).toHaveURL(/checkout-step-one/);
+
+    await checkoutPage.fillCheckoutInformation(checkoutData.validUser.firstName, checkoutData.validUser.lastName, checkoutData.validUser.postalCode);
+
+    await expect(page).toHaveURL(/checkout-step-two/);
     
+    await expect(checkoutPage.checkoutSummary).toBeVisible();
+
+    await expect(checkoutPage.finishBtn).toBeVisible();
+
   });
   
   test("CHK-007 | Verify selected products are displayed", async({page, inventoryPage, cartPage, checkoutPage})=>{
-    
+    await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
+    await inventoryPage.addProductToCart(PRODUCTS.BIKE_LIGHT);
+
+    await inventoryPage.openCart();
+    await cartPage.checkout();
+
+    await expect(page).toHaveURL(/checkout-step-one/);
+
+    await checkoutPage.fillCheckoutInformation(checkoutData.validUser.firstName, checkoutData.validUser.lastName, checkoutData.validUser.postalCode);
+
+    const products = await checkoutPage.productNames.allTextContents();
+
+    expect(products).toEqual(
+      expect.arrayContaining([
+        PRODUCTS.BACKPACK,
+        PRODUCTS.BIKE_LIGHT
+      ])
+    );
+
+    expect(products).toHaveLength(2);
   });
   
   test("CHK-008 | Verify payment information", async({page, inventoryPage, cartPage, checkoutPage})=>{
-    
+    await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
+
+    await inventoryPage.openCart();
+    await cartPage.checkout();
+
+    await expect(page).toHaveURL(/checkout-step-one/);
+
+    await checkoutPage.fillCheckoutInformation(checkoutData.validUser.firstName, checkoutData.validUser.lastName, checkoutData.validUser.postalCode);
+
+    await expect(checkoutPage.paymentInfo).toHaveText("SauceCard #31337");
+    await expect(checkoutPage.shippingInfo).toHaveText("Free Pony Express Delivery!");
+
   });
   
   test("CHK-009 | Verify shipping information", async({page, inventoryPage, cartPage, checkoutPage})=>{
-    
+    await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
+
+    await inventoryPage.openCart();
+    await cartPage.checkout();
+
+    await expect(page).toHaveURL(/checkout-step-one/);
+
+    await checkoutPage.fillCheckoutInformation(checkoutData.validUser.firstName, checkoutData.validUser.lastName, checkoutData.validUser.postalCode);
+
+    await expect(checkoutPage.shippingInfo).toHaveText("Free Pony Express Delivery!");
   });
   
-  test("CHK-010 | Verify total price calculation", async({page, inventoryPage, cartPage, checkoutPage})=>{
-    
+  test.only("CHK-010 | Verify total price calculation", async({page, inventoryPage, cartPage, checkoutPage})=>{
+    await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
+
+    await inventoryPage.openCart();
+    await cartPage.checkout();
+
+    await expect(page).toHaveURL(/checkout-step-one/);
+
+    await checkoutPage.fillCheckoutInformation(checkoutData.validUser.firstName, checkoutData.validUser.lastName, checkoutData.validUser.postalCode);
+
+    const itemTotal = Number((await checkoutPage.itemTotal.textContent())?.replace("Item total: $", ""));
+    const tax = Number((await checkoutPage.tax.textContent())?.replace("Tax: $", ""));
+    const total = Number((await checkoutPage.total.textContent())?.replace("Total: $", ""));
+
+    expect(itemTotal + tax).toBeCloseTo(total);
   });
   
   test("CHK-011 | Finish checkout", async({page, inventoryPage, cartPage, checkoutPage})=>{
