@@ -15,6 +15,9 @@ export class CheckoutPage extends BasePage {
     readonly itemTotal: Locator;
     readonly tax: Locator;
     readonly total: Locator;
+    readonly completeHeader: Locator;
+    readonly completeText: Locator;
+    readonly backHomeBtn: Locator;
     
     constructor(page: Page){
         super(page);
@@ -31,6 +34,9 @@ export class CheckoutPage extends BasePage {
         this.itemTotal = page.locator('[data-test="subtotal-label"]');
         this.tax = page.locator('[data-test="tax-label"]');
         this.total = page.locator('[data-test="total-label"]');
+        this.completeHeader = page.locator('[data-test="complete-header"]');
+        this.completeText = page.locator('[data-test="complete-text"]');
+        this.backHomeBtn = page.locator('[data-test="back-to-products"]');
     }
 
     async fillCheckoutInformation(firstName: string, lastName: string, postalCode: string){
@@ -39,5 +45,13 @@ export class CheckoutPage extends BasePage {
         await this.postalCode.fill(postalCode);
 
         await this.continueBtn.click();
+    }
+
+    async finishCheckout(){
+        await this.finishBtn.click();
+    }
+
+    async backHome(){
+        await this.backHomeBtn.click();
     }
 }

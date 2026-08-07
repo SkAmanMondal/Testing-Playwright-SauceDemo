@@ -149,7 +149,7 @@ test.describe("Checkout Module", () => {
     await expect(checkoutPage.shippingInfo).toHaveText("Free Pony Express Delivery!");
   });
   
-  test.only("CHK-010 | Verify total price calculation", async({page, inventoryPage, cartPage, checkoutPage})=>{
+  test("CHK-010 | Verify total price calculation", async({page, inventoryPage, cartPage, checkoutPage})=>{
     await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
 
     await inventoryPage.openCart();
@@ -167,15 +167,59 @@ test.describe("Checkout Module", () => {
   });
   
   test("CHK-011 | Finish checkout", async({page, inventoryPage, cartPage, checkoutPage})=>{
-    
+    await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
+
+    await inventoryPage.openCart();
+    await cartPage.checkout();
+
+    await expect(page).toHaveURL(/checkout-step-one/);
+
+    await checkoutPage.fillCheckoutInformation(checkoutData.validUser.firstName, checkoutData.validUser.lastName, checkoutData.validUser.postalCode);
+
+    await checkoutPage.finishCheckout();
+
+    await expect(page).toHaveURL(/checkout-complete/);
+
   });
   
   test("CHK-012 | Verify order confirmation", async({page, inventoryPage, cartPage, checkoutPage})=>{
-    
+    await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
+
+    await inventoryPage.openCart();
+    await cartPage.checkout();
+
+    await expect(page).toHaveURL(/checkout-step-one/);
+
+    await checkoutPage.fillCheckoutInformation(checkoutData.validUser.firstName, checkoutData.validUser.lastName, checkoutData.validUser.postalCode);
+
+    await checkoutPage.finishCheckout();
+
+    await expect(page).toHaveURL(/checkout-complete/);
+
+    await expect(checkoutPage.completeHeader).toHaveText("Thank you for your order!");
+    await expect(checkoutPage.completeText).toHaveText("Your order has been dispatched, and will arrive just as fast as the pony can get there!");
+
   });
   
   test("CHK-013 | Back Home navigation", async({page, inventoryPage, cartPage, checkoutPage})=>{
-    
+        await inventoryPage.addProductToCart(PRODUCTS.BACKPACK);
+
+    await inventoryPage.openCart();
+    await cartPage.checkout();
+
+    await expect(page).toHaveURL(/checkout-step-one/);
+
+    await checkoutPage.fillCheckoutInformation(checkoutData.validUser.firstName, checkoutData.validUser.lastName, checkoutData.validUser.postalCode);
+
+    await checkoutPage.finishCheckout();
+
+    await expect(page).toHaveURL(/checkout-complete/);
+
+    await checkoutPage.backHome();
+
+    await expect(page).toHaveURL(/inventory/);
+
+    await expect(inventoryPage.inventoryContainer).toBeVisible();
   });
   
 

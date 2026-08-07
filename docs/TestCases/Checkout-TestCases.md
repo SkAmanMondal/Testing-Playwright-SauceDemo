@@ -12,6 +12,6 @@
 | CHK-008 | Verify payment information | Medium | Pass |
 | CHK-009 | Verify shipping information | Medium | Pass |
 | CHK-010 | Verify total price calculation | High | Pass |
-| CHK-011 | Finish checkout | High | Not Started |
-| CHK-012 | Verify order confirmation | High | Not Started |
-| CHK-013 | Back Home navigation | Medium | Not Started |
+| CHK-011 | Finish checkout | High | Pass |
+| CHK-012 | Verify order confirmation | High | Pass |
+| CHK-013 | Back Home navigation | Medium | Pass |
